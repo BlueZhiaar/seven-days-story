@@ -8,6 +8,17 @@ var app = require('../app');
 var debug = require('debug')('seven-days-story:server');
 var http = require('http');
 
+//認証
+const auth = require('http-auth');
+const basic = auth.basic(
+  { realm: 'Enquetes Area' },
+  (username,password,callback) => {
+    callback(username === 'testplayer' && password === '1111');
+  }
+);
+
+
+
 /**
  * Get port from environment and store in Express.
  */

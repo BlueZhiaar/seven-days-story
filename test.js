@@ -1,4 +1,5 @@
 'use strict';
 const jsonData = require('./public/storys/routine.json');
-console.log(jsonData);
-console.log(jsonData.routine[1]);
+const storyControl = require('./public/javascripts/story-control.js');
+
+console.log(storyControl.getStory(jsonData.routine));
