@@ -3,3 +3,10 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  if user 
+    p こんにちは #{user.username} さん。
+    div.d-flex.flex-column
+      a(href="/logout") Logout 
+      a(href="/newchara") 新規キャラクター作成
+  else 
+    a(href="login") Login 

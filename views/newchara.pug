@@ -2,5 +2,9 @@ extends layout
 
 block content
   h1= title
-  p 新規キャラクター作成　ボックス　OK
-  h1#now
+  p 作成するキャラクターの名前を入力してください。
+  form(method="post" action="/posts")
+    div 
+      textarea(name="charaname", cols="30", rows="1")
+    div 
+      button(type="submit") OK

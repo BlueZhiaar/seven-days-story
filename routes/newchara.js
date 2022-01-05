@@ -6,4 +6,5 @@ router.get('/', function(req, res, next) {
   res.render('newchara', { title: '七日間の物語り' });
 });
 
+
 module.exports = router;

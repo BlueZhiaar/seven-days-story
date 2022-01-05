@@ -37,20 +37,11 @@ var jsonData = require('./public/storys/routine.json');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var topRouter = require('./routes/top');
-var onedayresultRouter = require('./routes/onedayresult');
 var decidepolRouter = require('./routes/decidepol');
-var alldayslogRouter = require('./routes/alldayslog');
 var timestatusRouter = require('./routes/timestatus');
 var newcharaRouter = require('./routes/newchara');
-var logoutRouter = require('./routes/logout');
 const router = require('./routes/index');
 
-      
-
-
-
-//外部認証
 
 var app = express();
 app.use(helmet());
@@ -73,13 +64,12 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/top', topRouter);
-app.use('/onedayresult', onedayresultRouter);
 app.use('/decidepol',decidepolRouter);
-app.use('/alldayslog', alldayslogRouter);
 app.use('/timestatus', timestatusRouter);
 app.use('/newchara', newcharaRouter);
 
+
+//GitHub
 app.get('/auth/github',
   passport.authenticate('github', { scope: ['user:email'] }),
   function (req, res) {
@@ -88,8 +78,32 @@ app.get('/auth/github',
 app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
-    res.redirect('/newchara');
+    res.redirect('/');
 });
+
+app.get('/login', function (req, res) {
+  res.render('login');
+});
+
+app.get('/logout', function (req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+
+//キャラ名を受け取る
+const bodyParser = require('body-parser');
+let charaname;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.post('/posts', (req, res) => {
+  console.log(req.body);
+  charaname=req.body.charaname;
+  console.log(charaname);
+  res.redirect('/decidepol');
+})
+
 
 
 
