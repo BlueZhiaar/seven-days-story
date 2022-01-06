@@ -91,18 +91,8 @@ app.get('/logout', function (req, res) {
 });
 
 
-//キャラ名を受け取る
-const bodyParser = require('body-parser');
-let charaname;
 
-app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/posts', (req, res) => {
-  console.log(req.body);
-  charaname=req.body.charaname;
-  console.log(charaname);
-  res.redirect('/decidepol');
-})
 
 
 
