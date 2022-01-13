@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  h1= title
-  p こんにちは#{charaname}さん
+  each post in posts 
+    p #{post.charaname}
   h3 行動の指針の入力画面
   

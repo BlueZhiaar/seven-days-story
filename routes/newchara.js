@@ -9,15 +9,6 @@ router.get('/', function(req, res, next) {
   res.render('newchara', { title: test });
 });
 
-//キャラ名を受け取る
-const bodyParser = require('body-parser');
-let charaname;
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
-router.get('/newchara', (req, res,next) => {
-  
-  next();
-})
 
 module.exports = router;

@@ -16,3 +16,5 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: seven-days-story
       TZ: "Asia/Tokyo"
+    volumes:
+      - ../seven-days-story-db:/var/lib/postgresql/data

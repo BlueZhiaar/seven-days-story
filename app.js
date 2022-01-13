@@ -32,12 +32,11 @@ passport.use(new GitHubStrategy({
   }
 ));
 
-var Post = require('./lib/post');
+
 var jsonData = require('./public/storys/routine.json');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var decidepolRouter = require('./routes/decidepol');
 var timestatusRouter = require('./routes/timestatus');
 var newcharaRouter = require('./routes/newchara');
 const router = require('./routes/index');
@@ -64,7 +63,6 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/decidepol',decidepolRouter);
 app.use('/timestatus', timestatusRouter);
 app.use('/newchara', newcharaRouter);
 
@@ -79,10 +77,18 @@ app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function (req, res) {
     res.redirect('/');
+   
 });
 
 app.get('/login', function (req, res) {
   res.render('login');
+  
+  Users.create({
+    user_id: req.user
+  }).then(() => {
+    res.redirect('/');
+  })
+
 });
 
 app.get('/logout', function (req, res) {
@@ -90,6 +96,39 @@ app.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
+//dbの準備のために一旦入力した値を配列に格納
+
+//データベースに保存する
+var Users = require('./lib/post');
+let Charas = require('./lib/post');
+let CharaData = require('./lib/post');
+let StoryData = require('./lib/post');
+
+
+//入力した値を表示する
+var bodyParser = require('body-parser');
+const { unwatchFile } = require('fs');
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+
+app.route('/newchara')
+  .post(function (req, res) {
+    let charaname = req.body.charaname;
+
+      res.redirect('/decidepol');
+
+  })
+
+
+app.route('/decidepol')
+  .get(function (req, res) {
+      User.findAll().then((posts) => {
+        res.render('decidepol', { charaname: posts });
+      })
+    });
+  
+  
 
 
 
