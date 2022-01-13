@@ -9,8 +9,14 @@ var session = require('express-session');
 var passport = require('passport');
 var GitHubStrategy = require('passport-github2').Strategy;
 
-var GITHUB_CLIENT_ID = '0c600b0785b19fd97e24';
-var GITHUB_CLIENT_SECRET = 'b664fc2c8d9dce034c5265465ef718a03968792c';
+const dotenv = require('dotenv');
+dotenv.config();
+
+
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
+
+
 
 passport.serializeUser(function (user, done) {
   done(null, user);
