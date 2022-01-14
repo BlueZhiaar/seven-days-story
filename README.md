@@ -106,3 +106,38 @@ StoryData.sync();
 })();
 これに書き換え。
 テーブル構造をまるまる変えた。
+
+UUID
+UUIDの場合は、を使用しますDataTypes.UUID。UUIDPostgreSQLとSQLite、およびCHAR(36)MySQLのデータ型になります。Sequelizeは、これらのフィールドのUUIDを自動的に生成できます。単に、DataTypes.UUIDV1またはDataTypes.UUIDV4デフォルト値として使用します。
+
+{
+  type: DataTypes.UUID,
+  defaultValue: DataTypes.UUIDV4 // Or DataTypes.UUIDV1
+}
+
+(node:261) UnhandledPromiseRejectionWarning: SequelizeDatabaseError: column "story_id" referenced in foreign key constraint does not exist
+    at Query.formatError (/seven-days-story/node_modules/sequelize/lib/dialects/postgres/query.js:386:16)
+    at Query.run (/seven-days-story/node_modules/sequelize/lib/dialects/postgres/query.js:87:18)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /seven-days-story/node_modules/sequelize/lib/sequelize.js:619:16
+    at async PostgresQueryInterface.createTable (/seven-days-story/node_modules/sequelize/lib/dialects/abstract/query-interface.js:225:12)
+    at async Function.sync (/seven-days-story/node_modules/sequelize/lib/model.js:1300:5)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:261) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handl
+ed with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id
+: 1)
+(node:261) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+
+(node:389) UnhandledPromiseRejectionWarning: SequelizeDatabaseError: column "story_id" referenced in foreign key constraint does not exist
+    at Query.formatError (/seven-days-story/node_modules/sequelize/lib/dialects/postgres/query.js:386:16)
+    at Query.run (/seven-days-story/node_modules/sequelize/lib/dialects/postgres/query.js:87:18)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async /seven-days-story/node_modules/sequelize/lib/sequelize.js:619:16
+    at async PostgresQueryInterface.createTable (/seven-days-story/node_modules/sequelize/lib/dialects/abstract/query-interface.js:225:12)
+    at async Function.sync (/seven-days-story/node_modules/sequelize/lib/model.js:1300:5)
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:389) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handl
+ed with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id
+: 1)
+(node:389) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+^C

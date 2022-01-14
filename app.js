@@ -88,12 +88,6 @@ app.get('/auth/github/callback',
 
 app.get('/login', function (req, res) {
   res.render('login');
-  
-  Users.create({
-    user_id: req.user
-  }).then(() => {
-    res.redirect('/');
-  })
 
 });
 
@@ -105,10 +99,10 @@ app.get('/logout', function (req, res) {
 //dbの準備のために一旦入力した値を配列に格納
 
 //データベースに保存する
-var Users = require('./lib/post');
-let Charas = require('./lib/post');
-let CharaData = require('./lib/post');
-let StoryData = require('./lib/post');
+const CharaData = require('./lib/post');
+const StoryData = require('./lib/post');
+const EpisodeData = require('./lib/post');
+const EndingData = require('./lib/post');
 
 
 //入力した値を表示する
@@ -122,17 +116,8 @@ app.route('/newchara')
   .post(function (req, res) {
     let charaname = req.body.charaname;
 
-      res.redirect('/decidepol');
-
+    res.redirect('/decidepol');
   })
-
-
-app.route('/decidepol')
-  .get(function (req, res) {
-      User.findAll().then((posts) => {
-        res.render('decidepol', { charaname: posts });
-      })
-    });
   
   
 
